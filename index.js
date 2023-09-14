@@ -4,10 +4,15 @@ const cors = require("cors");
 require('dotenv').config();
 
 
-connectToMOngo();
 const app = express();
+app.use(express.json());
 
 const port = process.env.PORT;
+
+
+connectToMOngo();
+//routes
+app.use("/api/events", require("./Routes/Events"));
 
 
 app.listen( port,  () =>{

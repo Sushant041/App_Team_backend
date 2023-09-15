@@ -16,20 +16,42 @@ const postEvent = async (req, res) =>{
 const getEvent = async (req, res) =>{
     try {
         const events = await Event.find();
-        res.status(201).json(events);
+        res.status(200).json(events);
     } catch (error) {
-        res.status(500).jason(error)
+        res.status(500).json(error)
     }
 }
 
-const deleteEvent = (req, res) =>{
-    res.send("hello");
-    console.log("Event deleted successfully");
+const deleteEvent = async(req, res) =>{
+    
+    const id = req.params.id;
+    try {
+         
+        const deletedEvent = await Event.findByIdAndDelete(id);
+        res.status(200).send({message: "Event deleted successfully", deletedEvent});
+    } 
+    catch (error) {
+       res.status(500).send(error); 
+    }
 }
 
-const updateEvent = (req, res) =>{
-    res.send("hello");
-    console.log("Event patched successfully");
+const updateEvent = async (req, res) =>{
+    
+    const id = req.params.id;
+    const update = req.body;
+
+    try {
+        const updatedEvent = await Event.findByIdAndUpdate(id, update,
+            {
+                new: true
+            });
+        console.log(updatedEvent);
+
+        res.status(200).send({message: "Event updated successfully", updatedEvent});
+    }
+     catch (error) {
+        res.status(500).send(error);
+    }
 }
 
 

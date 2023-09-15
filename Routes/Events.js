@@ -4,9 +4,9 @@ const {postEvent, getEvent, deleteEvent, updateEvent} = require("../controllers/
 const router = express.Router();
 
 
-router.post("/postevent", postEvent);
-router.get("/getevent", getEvent);
-router.delete("/deleteevent", deleteEvent);
-router.patch("/updateevent", updateEvent);
+router.post("/postEvent", postEvent);
+router.get("/getEvent", getEvent);
+router.delete("/deleteEvent/:id", deleteEvent);
+router.patch("/updateEvent/:id", updateEvent);
 
 module.exports = router;

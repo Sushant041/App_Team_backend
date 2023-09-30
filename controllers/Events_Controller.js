@@ -14,11 +14,43 @@ const postEvent = async (req, res) =>{
 }
 
 const getEvent = async (req, res) =>{
+
     try {
-        const events = await Event.find();
-        res.status(200).json(events);
-    } catch (error) {
-        res.status(500).json(error)
+       const events = await Event.find();
+       res.status(200).json(events); 
+    }
+     catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+
+const getSearchEvent = async (req, res) =>{
+         
+    const schEvent = req.query.search ?
+    {
+        $or: [
+            {name: {$regex: req.query.search, $options: "i"}},
+        ],
+    }
+    : {}
+
+    if(schEvent){
+
+        try {
+            const events = await Event.find(schEvent);
+            res.send(events);
+        } catch (error) {
+            res.send(error);
+        }
+    }
+    else{
+        try {
+            const events = await Event.find();
+            res.status(200).json(events);
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
 }
 
@@ -45,7 +77,6 @@ const updateEvent = async (req, res) =>{
             {
                 new: true
             });
-        console.log(updatedEvent);
 
         res.status(200).send({message: "Event updated successfully", updatedEvent});
     }
@@ -55,4 +86,4 @@ const updateEvent = async (req, res) =>{
 }
 
 
-module.exports = {postEvent, getEvent, deleteEvent, updateEvent};
+module.exports = {postEvent, getEvent, getSearchEvent, deleteEvent, updateEvent};

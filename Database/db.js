@@ -6,7 +6,7 @@ const password = process.env.PASSWORD;
 const mongo_url = `mongodb+srv://karangill1810:Notification%4097@cluster0.ipzbkbg.mongodb.net/`
 
 
-const connectToMOngo = async() =>{
+const connectToMongo = async() =>{
 
     try {
         const connect = await mongoose.connect(mongo_url,

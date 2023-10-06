@@ -6,13 +6,20 @@ const password = process.env.PASSWORD;
 const mongo_url = `mongodb+srv://karangill1810:Notification%4097@cluster0.ipzbkbg.mongodb.net/`
 
 
-const connectToMongo = async() =>{
+const connectToMOngo = async() =>{
 
-    const connect = await mongoose.connect(mongo_url);
-
-    if(connect){
-        console.log("Connnected to mongodb");
+    try {
+        const connect = await mongoose.connect(mongo_url,
+            {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
+            console.log(`connected to mongo`);
+    } 
+    catch (error) {
+        console.log("Error connecting to mongodb", error);
     }
-}
+
+} 
 
 module.exports = connectToMongo;

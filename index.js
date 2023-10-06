@@ -2,21 +2,30 @@ const express = require("express");
 const connectToMongo = require("./Database/db");
 const cors = require("cors");
 const teamrouter = require("./Routes/TeamRoutes")
+const swaggerUi = require("swagger-ui-express");
+const spec = require("./swagger/swagger.Json");
+
 require('dotenv').config();
 
 
-connectToMongo();
 const app = express();
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
 // app.get("/", (req, res)=>{
 //   res.send({message: "hii"});
 // })
-app.use("/team", teamrouter);
+
 const port = process.env.PORT;
 
 
-app.listen( port, () =>{
+connectToMongo();
+//routes
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
+app.use("/", require("./Routes/Events"));
+app.use("/team", teamrouter);
+
+
+app.listen( port,  () =>{
   console.log(`Server on ${port}`);
 })

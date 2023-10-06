@@ -1,6 +1,7 @@
 const express = require("express");
-const connectToMOngo = require("./Database/db");
+const connectToMongo = require("./Database/db");
 const cors = require("cors");
+const teamrouter = require("./Routes/TeamRoutes")
 const swaggerUi = require("swagger-ui-express");
 const spec = require("./swagger/swagger.Json");
 
@@ -11,13 +12,18 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// app.get("/", (req, res)=>{
+//   res.send({message: "hii"});
+// })
+
 const port = process.env.PORT;
 
 
-connectToMOngo();
+connectToMongo();
 //routes
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
 app.use("/", require("./Routes/Events"));
+app.use("/team", teamrouter);
 
 
 app.listen( port,  () =>{

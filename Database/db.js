@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const password = process.env.PASSWORD;
 
-const mongo_url = `mongodb+srv://grtsushant:${process.env.PASSWORD}@cluster0.bjfldye.mongodb.net/?retryWrites=true&w=majority`
+const mongo_url = `mongodb+srv://karangill1810:Notification%4097@cluster0.ipzbkbg.mongodb.net/`
 
 
 const connectToMOngo = async() =>{
@@ -22,4 +22,4 @@ const connectToMOngo = async() =>{
 
 } 
 
-module.exports = connectToMOngo;
+module.exports = connectToMongo;

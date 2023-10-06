@@ -1,15 +1,22 @@
 const express = require("express");
-const connectToMOngo = require("./Database/db");
+const connectToMongo = require("./Database/db");
 const cors = require("cors");
+const teamrouter = require("./Routes/TeamRoutes")
 require('dotenv').config();
 
 
-connectToMOngo();
+connectToMongo();
 const app = express();
+app.use(cors());
+app.use(express.json());
 
+// app.get("/", (req, res)=>{
+//   res.send({message: "hii"});
+// })
+app.use("/team", teamrouter);
 const port = process.env.PORT;
 
 
-app.listen( port,  () =>{
+app.listen( port, () =>{
   console.log(`Server on ${port}`);
 })

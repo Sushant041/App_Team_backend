@@ -3,11 +3,16 @@ require('dotenv').config();
 
 const password = process.env.PASSWORD;
 
-const mongo_url = `mongodb+srv://grtsushant:${password}@cluster0.bjfldye.mongodb.net/?retryWrites=true&w=majority`
+const mongo_url = `mongodb+srv://karangill1810:Notification%4097@cluster0.ipzbkbg.mongodb.net/`
 
 
-const connectToMOngo = (mongo_url, ()=>{
-    console.log("connected to mongo");
-})
+const connectToMongo = async() =>{
 
-module.exports = connectToMOngo;
+    const connect = await mongoose.connect(mongo_url);
+
+    if(connect){
+        console.log("Connnected to mongodb");
+    }
+}
+
+module.exports = connectToMongo;
